@@ -1,4 +1,5 @@
 import { createEditor } from './editor.js'
+import { createDefaultUrl } from './url.js'
 
 document.fonts.ready.then(() => {
   document.body.dataset.show = ''
@@ -9,12 +10,7 @@ const el_copy = document.querySelector('#copy')
 const el_clash = document.querySelector('#clash')
 const el_editor = document.querySelector('#editor')
 
-const url = new URL(
-  location.hash.slice(1).replace(
-    /^(https?:\/*)?(.*)/i,
-    (_, $1, $2) => ($1 || 'https://') + ($2 || 'arx.cc'),
-  ),
-)
+const url = createDefaultUrl(location.hash.slice(1))
 
 el_result.value = url.href
 

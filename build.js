@@ -123,3 +123,10 @@ try {
 for (const name of ['index']) {
   await dfs(`${name}.html`, '', Object.create(null))
 }
+for (const name of ['_headers', '_redirects']) {
+  try {
+    Deno.copyFileSync(`${inDir}/${name}`, `${outDir}/${name}`)
+  } catch (e) {
+    if (!(e instanceof Deno.errors.NotFound)) throw e
+  }
+}
